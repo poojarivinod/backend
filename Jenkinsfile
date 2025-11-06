@@ -22,9 +22,13 @@ pipeline {
         stage('Read Version') {
             steps {
                 script{
-                    sh """
-                        npm install
-                    """
+                    // search in google as "readjson in jenkins" --> click on Pipeline Utility Steps
+                    // jenkins will read the package.json file and store the content into packageJson
+                    def packageJson = readJSON file: 'package.json'
+                    // we get the version information into the appVersion
+                    appVersion = packageJson.version
+                    // It will print the appVersion
+                    echo "Version is: $appVersion"        
                 }
             }
         }
@@ -33,13 +37,9 @@ pipeline {
         stage('Insatll Dependencies') {
             steps {
                 script{
-                    // search in google as "readjson in jenkins" --> click on Pipeline Utility Steps
-                    // jenkins will read the package.json file and store the content into packageJson
-                    def packageJson = readJSON file: 'package.json'
-                    // we get the version information into the appVersion
-                    appVersion = packageJson.version
-                    // It will print the appVersion
-                    echo "Version is: $appVersion"
+                    sh """
+                        npm install
+                    """
                 }
             }
         }
