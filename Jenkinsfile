@@ -22,6 +22,17 @@ pipeline {
         stage('Read Version') {
             steps {
                 script{
+                    sh """
+                        npm install
+                    """
+                }
+            }
+        }
+    }  
+    stages {
+        stage('Insatll Dependencies') {
+            steps {
+                script{
                     // search in google as "readjson in jenkins" --> click on Pipeline Utility Steps
                     // jenkins will read the package.json file and store the content into packageJson
                     def packageJson = readJSON file: 'package.json'
