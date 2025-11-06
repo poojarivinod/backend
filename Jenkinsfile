@@ -32,8 +32,6 @@ pipeline {
                 }
             }
         }
-    }  
-    stages {
         stage('Insatll Dependencies') {
             steps {
                 script{
